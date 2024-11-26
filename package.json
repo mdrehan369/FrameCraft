@@ -8,15 +8,16 @@
   },
   "author": "MD Rehan",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@types/commander": "^2.12.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^12.1.0",
     "commander": "^12.1.0",
     "dotenv": "^16.4.5"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }
