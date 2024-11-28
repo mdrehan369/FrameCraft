@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { confirm } from './confirm'
+import chalk from 'chalk';
 
 // If root directory not given, it will take the current directory as the root directory
 
@@ -12,7 +13,7 @@ export class FileManager {
         ;(async () => {
             if (fs.existsSync(rootDir)) {
                 confirm(
-                    'Error: The directory already exists.\nDo you want to delete that and proceed?',
+                    chalk.yellowBright('The directory already exists.\nDo you want to delete that and proceed?'),
                     () => fs.rmSync(rootDir, { recursive: true }),
                     () => process.exit(1)
                 )

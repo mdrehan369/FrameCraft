@@ -1,8 +1,10 @@
-export const ErrorHandler = (fn: () => void, onSuccessMsg?: string, onErrorMsg?: string) => {
+import { Logger } from "./logger"
+
+export const ErrorHandler = (fn: () => void, logger: Logger, onSuccessMsg?: string, onErrorMsg?: string) => {
     try {
         fn()
-        onSuccessMsg && console.log(onSuccessMsg)
+        onSuccessMsg && logger.success(onSuccessMsg)
     } catch (error) {
-        onErrorMsg || console.log(error)
+        onErrorMsg && logger.error(onErrorMsg)
     }
 }
