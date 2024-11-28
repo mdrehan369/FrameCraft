@@ -19,8 +19,7 @@
     "chalk": "^4.1.2",
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
-    "readline-sync": "^1.4.10",
-    "winston": "^3.17.0"
+    "readline-sync": "^1.4.10"
   },
   "keywords": [],
   "description": ""

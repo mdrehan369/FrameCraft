@@ -4,7 +4,9 @@ export const ErrorHandler = (fn: () => void, logger: Logger, onSuccessMsg?: stri
     try {
         fn()
         onSuccessMsg && logger.success(onSuccessMsg)
-    } catch (error) {
+    } catch (error: any) {
         onErrorMsg && logger.error(onErrorMsg)
+        logger.error(error)
+        // process.exit(1)
     }
 }
