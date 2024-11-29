@@ -123,3 +123,12 @@ const asyncHandler = (requestHandler) => {
 export { asyncHandler }
 
 `
+
+export const prettierrcFile = `
+{
+    "singleQuote": true,
+    "bracketSameLine": true,
+    "semi": false,
+    "tabWidth": 4
+}
+`
