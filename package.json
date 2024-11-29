@@ -1,18 +1,24 @@
 {
   "name": "framecraft",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "main": "index.js",
+  "bin": "./dist/index.js",
   "scripts": {
     "start": "npx ts-node src/index.ts",
-    "create-ts-project": "npx ts-node src"
+    "create-ts-project": "npx ts-node src",
+    "build": "tsc"
   },
   "author": "MD Rehan",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.15.0",
     "@types/commander": "^2.12.0",
     "@types/readline-sync": "^1.4.8",
+    "eslint": "^9.15.0",
+    "globals": "^15.12.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.16.0"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^12.1.0",

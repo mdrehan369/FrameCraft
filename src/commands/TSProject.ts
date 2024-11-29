@@ -1,51 +1,16 @@
 import { execSync } from 'child_process'
 import { program as Program } from '@commander-js/extra-typings'
-import path from 'path'
 import { TsConfig } from '../constants'
-import { FileManager } from '../utils/FileManager'
 import { ErrorHandler } from '../utils/errorHandler'
 import { Logger } from '../utils/logger'
+import { createJSProject } from '../utils/createJSProject'
 
 function initiateProject(projectName: string, opts: any) {
     const logger = new Logger()
-    let fileManager: FileManager
-    let rootDir = process.cwd()
+    
+    const fileManager = createJSProject(logger, projectName, opts)
+    const rootDir = fileManager.getRootDir()
 
-    // Checking and assigning root directory. Also checks and if the directory already exists or not, if yes,
-    // it will prompt the user for further actions and also initializing package.json
-    logger.waiting('Initiating a typescript project...')
-    if (!projectName || projectName == '.')
-        fileManager = new FileManager(process.cwd())
-    else {
-        rootDir = path.join(process.cwd(), projectName)
-        fileManager = new FileManager(rootDir)
-    }
-
-    // Installing typescript and creating folder structure
-    if (opts.yes)
-        ErrorHandler(
-            () =>
-                execSync('npm init -y && clear', {
-                    cwd: rootDir,
-                    stdio: 'inherit',
-                }),
-            logger,
-            'Initiated project successfully!',
-            'Error occured while initiating project!'
-        )
-    else
-        ErrorHandler(
-            () =>
-                execSync('npm init && clear', {
-                    cwd: rootDir,
-                    stdio: 'inherit',
-                }),
-            logger,
-            'Initiated project successfully!',
-            'Error occured while initiating project!'
-        )
-
-    logger.clear()
     logger.waiting(
         'Installing typescript and creating folder structure...'
     )

@@ -1,7 +1,5 @@
 import { program as Program } from '@commander-js/extra-typings'
 import { Logger } from '../utils/logger'
-import { FileManager } from '../utils/FileManager'
-import path from 'path'
 import { execSync } from 'child_process'
 import { ErrorHandler } from '../utils/errorHandler'
 import {
@@ -12,47 +10,13 @@ import {
     expressConnectDBBoilerplate,
     expressIndexBoilerplate,
 } from '../constants'
+import { createJSProject } from '../utils/createJSProject'
 
 function initiateProject(projectName: string, opts: any) {
     const logger = new Logger()
 
-    let fileManager: FileManager
-    let rootDir = process.cwd()
-
-    // Checking and assigning root directory. Also checks and if the directory already exists or not, if yes,
-    // it will prompt the user for further actions and also initializing package.json
-    logger.waiting('Initiating a express project...')
-    if (!projectName || projectName == '.')
-        fileManager = new FileManager(process.cwd())
-    else {
-        rootDir = path.join(process.cwd(), projectName)
-        fileManager = new FileManager(rootDir)
-    }
-
-    if (opts.yes)
-        ErrorHandler(
-            () =>
-                execSync('npm init -y && clear', {
-                    cwd: rootDir,
-                    stdio: 'inherit',
-                }),
-            logger,
-            'Initiated project successfully!',
-            'Error occured while initiating project!'
-        )
-    else
-        ErrorHandler(
-            () =>
-                execSync('npm init && clear', {
-                    cwd: rootDir,
-                    stdio: 'inherit',
-                }),
-            logger,
-            'Initiated project successfully!',
-            'Error occured while initiating project!'
-        )
-
-    logger.clear()
+    const fileManager = createJSProject(logger, projectName, opts)
+    const rootDir = fileManager.getRootDir()
 
     logger.waiting('Installing all the required dependencies...')
     ErrorHandler(
@@ -122,6 +86,7 @@ function initiateProject(projectName: string, opts: any) {
     
     logger.clear()
     logger.success("Express project initiated successfully!")
+
 }
 
 function createExpressProject(program: typeof Program) {

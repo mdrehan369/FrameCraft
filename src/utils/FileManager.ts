@@ -10,16 +10,18 @@ export class FileManager {
 
     constructor(rootDir: string) {
         this.rootDir = rootDir
-        ;(async () => {
-            if (fs.existsSync(rootDir)) {
-                confirm(
-                    chalk.yellowBright('The directory already exists.\nDo you want to delete that and proceed?'),
-                    () => fs.rmSync(rootDir, { recursive: true }),
-                    () => process.exit(1)
-                )
-            }
-        })()
-        fs.mkdirSync(this.rootDir, { recursive: true })
+        if(process.cwd() != rootDir) {
+            ;(async () => {
+                if (fs.existsSync(rootDir)) {
+                    confirm(
+                        chalk.yellowBright('The directory already exists.\nDo you want to delete that and proceed?'),
+                        () => fs.rmSync(rootDir, { recursive: true }),
+                        () => process.exit(1)
+                    )
+                }
+            })()
+            fs.mkdirSync(this.rootDir, { recursive: true })
+        }
     }
 
     private handler = (fn: () => any) => {
@@ -49,4 +51,5 @@ export class FileManager {
         this.handler(() =>
             fs.readFileSync(path.join(this.rootDir, fileName), 'utf-8')
         )
+    getRootDir = () => this.rootDir
 }
