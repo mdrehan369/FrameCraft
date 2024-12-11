@@ -7,6 +7,6 @@ export const ErrorHandler = (fn: () => void, logger: Logger, onSuccessMsg?: stri
     } catch (error: any) {
         onErrorMsg && logger.error(onErrorMsg)
         logger.error(error)
-        // process.exit(1)
+        process.exit(1)
     }
 }

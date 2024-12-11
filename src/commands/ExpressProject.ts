@@ -12,6 +12,8 @@ import {
 } from '../constants'
 import { createJSProject } from '../utils/createJSProject'
 
+// TODO: Integrate TS into the project
+
 function initiateProject(projectName: string, opts: any) {
     const logger = new Logger()
 

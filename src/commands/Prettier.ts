@@ -7,6 +7,8 @@ import { program as Program } from "@commander-js/extra-typings"
 import { ErrorHandler } from '../utils/errorHandler'
 import { prettierrcFile } from '../constants'
 
+// TODO: Add scripts also
+
 export function initiatePrettier() {
     const rootDir = process.cwd()
     const logger = new Logger()
@@ -15,7 +17,7 @@ export function initiatePrettier() {
 
     logger.waiting('Initiaiting Prettier...')
     if (!filemanager.chkdir('package.json')) {
-        logger.warn('package.json file not found! First initialize the project')
+        logger.warn('package.json file not found! First initialize the project', false)
         confirm(
             'Do you want to initialize a JS project first? [Y/n] ',
             () => createJSProject(logger, '.', {}),
